@@ -66,3 +66,5 @@ lsmodel_frog <- lm(days ~ temperature, data = frog)
 summary(lsmodel_frog)
 
 anova(lsmodel_frog)
+
+
