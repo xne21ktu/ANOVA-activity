@@ -64,7 +64,28 @@ summary(frog)
 lsmodel_frog <- lm(days ~ temperature, data = frog)
 
 summary(lsmodel_frog)
+broom::tidy(lsmodel_frog, conf.int=T, conf.level=0.95)
+# The frogspawn hatching time in the 13 degrees treatment was an average of 26.3 [25.8-26.8](mean[95% CI]) days.
+# The hatching time in the 18 degrees treatment was an average of 21 [19.77-22.23].
+# The hatching time in the 25 degrees treatment was an average of 16.2 [15-17.43].
 
 anova(lsmodel_frog)
+# estimated signal is 386 times larger than the estimated noise 
+# lots of the variance is being explained by temperature
+#_____________________----
+# Check Assumptions ----
+performance::check_model(lsmodel_frog,
+                         check = c("qq", "outliers", "homogeneity"))
+# The values towards the middle of the fitted values seem to be more variable than the values at each end
+# residuals normally distributed 
 
+#_____________________----
+# Data Visualization ----
+
+#_____________________----
+# Summary ----
+# Frogspawn hatching time was reduced by increasing temperature (one-way ANOVA: F2,57 = 385.9, P < 0.001)
+# Hatching time at 13 degrees Celsius was a mean of 26.3 days [25.8-26.8 95% CI], 
+# which reduced by a mean of 5.3 days [4.57 - 6.02] when at 18 degrees Celsius,
+# and by 10.1 days [9.37 - 10.82] at 25 degrees Celsius.
 
